@@ -214,6 +214,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -350,6 +351,10 @@ MonoBehaviour:
     key: 111
     controllerButton: 10
     m_Enabled: 0
+  Artefact:
+    key: 108
+    controllerButton: 9
+    m_Enabled: 0
   Jump:
     key: 32
     controllerButton: 1
@@ -435,6 +440,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
         m_MethodName: SetInitialHeartCount
         m_Mode: 0
         m_Arguments:
@@ -446,6 +452,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 1
       - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
         m_MethodName: ChangeHitPointUI
         m_Mode: 0
         m_Arguments:
@@ -460,6 +467,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114854669915511232}
+        m_TargetAssemblyTypeName: 
         m_MethodName: OnHurt
         m_Mode: 0
         m_Arguments:
@@ -474,6 +482,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114854669915511232}
+        m_TargetAssemblyTypeName: 
         m_MethodName: OnDie
         m_Mode: 1
         m_Arguments:
@@ -552,6 +561,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 114854669915511232}
+          m_TargetAssemblyTypeName: 
           m_MethodName: KeyInventoryEvent
           m_Mode: 1
           m_Arguments:
@@ -570,6 +580,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 114854669915511232}
+          m_TargetAssemblyTypeName: 
           m_MethodName: KeyInventoryEvent
           m_Mode: 1
           m_Arguments:
@@ -588,6 +599,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 114854669915511232}
+          m_TargetAssemblyTypeName: 
           m_MethodName: KeyInventoryEvent
           m_Mode: 1
           m_Arguments:
@@ -606,6 +618,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 114734347468151670}
+          m_TargetAssemblyTypeName: 
           m_MethodName: EnableMeleeAttacking
           m_Mode: 1
           m_Arguments:
@@ -620,6 +633,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 114734347468151670}
+          m_TargetAssemblyTypeName: 
           m_MethodName: DisableMeleeAttacking
           m_Mode: 1
           m_Arguments:
@@ -635,6 +649,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 114734347468151670}
+          m_TargetAssemblyTypeName: 
           m_MethodName: EnableRangedAttacking
           m_Mode: 1
           m_Arguments:
@@ -649,7 +664,39 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 114734347468151670}
+          m_TargetAssemblyTypeName: 
           m_MethodName: DisableRangedAttacking
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - key: Artefact
+    OnAdd:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114734347468151670}
+          m_TargetAssemblyTypeName: Gamekit2D.PlayerInput, Assembly-CSharp
+          m_MethodName: EnableArtefact
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnRemove:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114734347468151670}
+          m_TargetAssemblyTypeName: Gamekit2D.PlayerInput, Assembly-CSharp
+          m_MethodName: DisableArtefact
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -899,6 +946,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1230,6 +1278,7 @@ Light:
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!1 &1656601937457706
@@ -1765,5 +1814,6 @@ Light:
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0

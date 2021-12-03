@@ -197,6 +197,7 @@ namespace Gamekit2D
                     Unpause();
                 }
             }
+
         }
 
         void FixedUpdate()
@@ -206,6 +207,8 @@ namespace Gamekit2D
             m_Animator.SetFloat(m_HashVerticalSpeedPara, m_MoveVector.y);
             UpdateBulletSpawnPointPositions();
             UpdateCameraFollowTargetPosition();
+            
+            ActivateArtifactAbility();
         }
 
         public void Unpause()
@@ -215,6 +218,20 @@ namespace Gamekit2D
                 return;
 
             StartCoroutine(UnpauseCoroutine());
+        }
+
+        private void ActivateArtifactAbility()
+        {
+            if (PlayerInput.Instance.Artefact.Held)
+            {
+                Physics2D.gravity = new Vector2(0, 9.81f);
+                gravity = -100.0f;
+            }
+            else
+            {
+                Physics2D.gravity = new Vector2(0, -9.81f);
+                gravity = 50.0f;
+            }
         }
 
         protected IEnumerator UnpauseCoroutine()
