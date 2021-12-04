@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Security.Principal;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -11,7 +10,11 @@ namespace Gamekit2D
     public class PlayerCharacter : MonoBehaviour
     {
         static protected PlayerCharacter s_PlayerInstance;
-        static public PlayerCharacter PlayerInstance { get { return s_PlayerInstance; } }
+
+        static public PlayerCharacter PlayerInstance
+        {
+            get { return s_PlayerInstance; }
+        }
 
         public InventoryController inventoryController
         {
@@ -37,7 +40,9 @@ namespace Gamekit2D
         public float jumpSpeed = 20f;
         public float jumpAbortSpeedReduction = 100f;
 
-        [Range(k_MinHurtJumpAngle, k_MaxHurtJumpAngle)] public float hurtJumpAngle = 45f;
+        [Range(k_MinHurtJumpAngle, k_MaxHurtJumpAngle)]
+        public float hurtJumpAngle = 45f;
+
         public float hurtJumpSpeed = 5f;
         public float flickeringDuration = 0.1f;
 
@@ -109,7 +114,16 @@ namespace Gamekit2D
 
         protected const float k_MinHurtJumpAngle = 0.001f;
         protected const float k_MaxHurtJumpAngle = 89.999f;
-        protected const float k_GroundedStickingVelocityMultiplier = 3f;    // This is to help the character stick to vertically moving platforms.
+
+        protected const float
+            k_GroundedStickingVelocityMultiplier =
+                3f; // This is to help the character stick to vertically moving platforms.
+
+        private ArtifactSettings _artifactSettings;
+        private IArtifact _artifact;
+        private IGravity _gravitation;
+        private float _jumpArtefactHeight;
+        private bool _isArtefact;
 
         //used in non alloc version of physic function
         protected ContactPoint2D[] m_ContactsBuffer = new ContactPoint2D[16];
@@ -125,7 +139,13 @@ namespace Gamekit2D
             m_Transform = transform;
             m_InventoryController = GetComponent<InventoryController>();
 
-            m_CurrentBulletSpawnPoint = spriteOriginallyFacesLeft ? facingLeftBulletSpawnPoint : facingRightBulletSpawnPoint;
+            m_CurrentBulletSpawnPoint =
+                spriteOriginallyFacesLeft ? facingLeftBulletSpawnPoint : facingRightBulletSpawnPoint;
+
+            _artifactSettings = GetComponent<ArtifactSettings>();
+            _gravitation = new Gravitation();
+            _gravitation.SetGravity(_artifactSettings.NormalGravity, gravity);
+            _artifact = new Artifact(_artifactSettings, m_CharacterController2D, gravity, _gravitation, meleeAttackAudioPlayer);
         }
 
         void Start()
@@ -156,6 +176,8 @@ namespace Gamekit2D
 
             m_StartingPosition = transform.position;
             m_StartingFacingLeft = GetFacing() < 0.0f;
+
+            _artifact.Init();
         }
 
         void OnTriggerEnter2D(Collider2D other)
@@ -190,25 +212,28 @@ namespace Gamekit2D
                     PlayerInput.Instance.Pause.GainControl();
                     m_InPause = true;
                     Time.timeScale = 0;
-                    UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("UIMenus", UnityEngine.SceneManagement.LoadSceneMode.Additive);
+                    UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("UIMenus",
+                        UnityEngine.SceneManagement.LoadSceneMode.Additive);
                 }
                 else
                 {
                     Unpause();
                 }
             }
-
         }
 
         void FixedUpdate()
-        { 
+        {
             m_CharacterController2D.Move(m_MoveVector * Time.deltaTime);
             m_Animator.SetFloat(m_HashHorizontalSpeedPara, m_MoveVector.x);
             m_Animator.SetFloat(m_HashVerticalSpeedPara, m_MoveVector.y);
             UpdateBulletSpawnPointPositions();
             UpdateCameraFollowTargetPosition();
-            
-            ActivateArtifactAbility();
+
+            _artifact.ApplyArtifactAbility();
+            gravity = _gravitation.GravityForce;
+            _artifact.ApplyCrushAbility();
+            //ActivateArtifactAbility();
         }
 
         public void Unpause()
@@ -218,20 +243,6 @@ namespace Gamekit2D
                 return;
 
             StartCoroutine(UnpauseCoroutine());
-        }
-
-        private void ActivateArtifactAbility()
-        {
-            if (PlayerInput.Instance.Artefact.Held)
-            {
-                Physics2D.gravity = new Vector2(0, 9.81f);
-                gravity = -100.0f;
-            }
-            else
-            {
-                Physics2D.gravity = new Vector2(0, -9.81f);
-                gravity = 50.0f;
-            }
         }
 
         protected IEnumerator UnpauseCoroutine()
@@ -268,12 +279,14 @@ namespace Gamekit2D
             float newLocalPosX;
             float newLocalPosY = 0f;
 
-            float desiredLocalPosX = (spriteOriginallyFacesLeft ^ spriteRenderer.flipX ? -1f : 1f) * cameraHorizontalFacingOffset;
+            float desiredLocalPosX = (spriteOriginallyFacesLeft ^ spriteRenderer.flipX ? -1f : 1f) *
+                                     cameraHorizontalFacingOffset;
             desiredLocalPosX += m_MoveVector.x * cameraHorizontalSpeedOffset;
             if (Mathf.Approximately(m_CamFollowHorizontalSpeed, 0f))
                 newLocalPosX = desiredLocalPosX;
             else
-                newLocalPosX = Mathf.Lerp(cameraFollowTarget.localPosition.x, desiredLocalPosX, m_CamFollowHorizontalSpeed * Time.deltaTime);
+                newLocalPosX = Mathf.Lerp(cameraFollowTarget.localPosition.x, desiredLocalPosX,
+                    m_CamFollowHorizontalSpeed * Time.deltaTime);
 
             bool moveVertically = false;
             if (!Mathf.Approximately(PlayerInput.Instance.Vertical.Value, 0f))
@@ -295,7 +308,8 @@ namespace Gamekit2D
                 if (Mathf.Approximately(m_CamFollowVerticalSpeed, 0f))
                     newLocalPosY = desiredLocalPosY;
                 else
-                    newLocalPosY = Mathf.MoveTowards(cameraFollowTarget.localPosition.y, desiredLocalPosY, m_CamFollowVerticalSpeed * Time.deltaTime);
+                    newLocalPosY = Mathf.MoveTowards(cameraFollowTarget.localPosition.y, desiredLocalPosY,
+                        m_CamFollowVerticalSpeed * Time.deltaTime);
             }
 
             cameraFollowTarget.localPosition = new Vector2(newLocalPosX, newLocalPosY);
@@ -324,6 +338,7 @@ namespace Gamekit2D
                     SpawnBullet();
                     m_NextShotTime = Time.time + m_ShotSpawnGap;
                 }
+
                 yield return null;
             }
         }
@@ -334,12 +349,13 @@ namespace Gamekit2D
             //otherwise, the player can "shoot throught wall" because the arm extend to the other side of the wall
             Vector2 testPosition = transform.position;
             testPosition.y = m_CurrentBulletSpawnPoint.position.y;
-            Vector2 direction = (Vector2)m_CurrentBulletSpawnPoint.position - testPosition;
+            Vector2 direction = (Vector2) m_CurrentBulletSpawnPoint.position - testPosition;
             float distance = direction.magnitude;
             direction.Normalize();
 
             RaycastHit2D[] results = new RaycastHit2D[12];
-            if (Physics2D.Raycast(testPosition, direction, m_CharacterController2D.ContactFilter, results, distance) > 0)
+            if (Physics2D.Raycast(testPosition, direction, m_CharacterController2D.ContactFilter, results, distance) >
+                0)
                 return;
 
             BulletObject bullet = bulletPool.Pop(m_CurrentBulletSpawnPoint.position);
@@ -383,11 +399,11 @@ namespace Gamekit2D
 
         public void GroundedVerticalMovement()
         {
-            m_MoveVector.y -= gravity * Time.deltaTime;
+            m_MoveVector.y -= _gravitation.GravityForce * Time.deltaTime;
 
-            if (m_MoveVector.y < -gravity * Time.deltaTime * k_GroundedStickingVelocityMultiplier)
+            if (m_MoveVector.y < -_gravitation.GravityForce * Time.deltaTime * k_GroundedStickingVelocityMultiplier)
             {
-                m_MoveVector.y = -gravity * Time.deltaTime * k_GroundedStickingVelocityMultiplier;
+                m_MoveVector.y = -_gravitation.GravityForce * Time.deltaTime * k_GroundedStickingVelocityMultiplier;
             }
         }
 
@@ -440,7 +456,9 @@ namespace Gamekit2D
         public void GroundedHorizontalMovement(bool useInput, float speedScale = 1f)
         {
             float desiredSpeed = useInput ? PlayerInput.Instance.Horizontal.Value * maxSpeed * speedScale : 0f;
-            float acceleration = useInput && PlayerInput.Instance.Horizontal.ReceivingInput ? groundAcceleration : groundDeceleration;
+            float acceleration = useInput && PlayerInput.Instance.Horizontal.ReceivingInput
+                ? groundAcceleration
+                : groundDeceleration;
             m_MoveVector.x = Mathf.MoveTowards(m_MoveVector.x, desiredSpeed, acceleration * Time.deltaTime);
         }
 
@@ -459,7 +477,8 @@ namespace Gamekit2D
                 FindCurrentSurface();
 
                 if (!wasGrounded && m_MoveVector.y < -1.0f)
-                {//only play the landing sound if falling "fast" enough (avoid small bump playing the landing sound)
+                {
+                    //only play the landing sound if falling "fast" enough (avoid small bump playing the landing sound)
                     landingAudioPlayer.PlayRandomSound(m_CurrentSurface);
                 }
             }
@@ -514,14 +533,17 @@ namespace Gamekit2D
 
                 if (pushableOnCorrectSide)
                 {
-                    Vector2 moveToPosition = movingRight ? m_CurrentPushable.playerPushingRightPosition.position : m_CurrentPushable.playerPushingLeftPosition.position;
+                    Vector2 moveToPosition = movingRight
+                        ? m_CurrentPushable.playerPushingRightPosition.position
+                        : m_CurrentPushable.playerPushingLeftPosition.position;
                     moveToPosition.y = m_CharacterController2D.Rigidbody2D.position.y;
                     m_CharacterController2D.Teleport(moveToPosition);
                 }
             }
 
-            if(previousPushable != null && m_CurrentPushable != previousPushable)
-            {//we changed pushable (or don't have one anymore), stop the old one sound
+            if (previousPushable != null && m_CurrentPushable != previousPushable)
+            {
+                //we changed pushable (or don't have one anymore), stop the old one sound
                 previousPushable.EndPushing();
             }
 
@@ -543,7 +565,7 @@ namespace Gamekit2D
 
         public void StopPushing()
         {
-            if(m_CurrentPushable)
+            if (m_CurrentPushable)
                 m_CurrentPushable.EndPushing();
         }
 
@@ -575,7 +597,8 @@ namespace Gamekit2D
             {
                 m_MoveVector.y = 0f;
             }
-            m_MoveVector.y -= gravity * Time.deltaTime;
+
+            m_MoveVector.y -= _gravitation.GravityForce * Time.deltaTime;
         }
 
         public bool CheckForJumpInput()
@@ -592,16 +615,16 @@ namespace Gamekit2D
         {
             int colliderCount = 0;
             int fallthroughColliderCount = 0;
-        
+
             for (int i = 0; i < m_CharacterController2D.GroundColliders.Length; i++)
             {
                 Collider2D col = m_CharacterController2D.GroundColliders[i];
-                if(col == null)
+                if (col == null)
                     continue;
 
                 colliderCount++;
 
-                if (PhysicsHelper.ColliderHasPlatformEffector (col))
+                if (PhysicsHelper.ColliderHasPlatformEffector(col))
                     fallthroughColliderCount++;
             }
 
@@ -614,7 +637,7 @@ namespace Gamekit2D
                         continue;
 
                     PlatformEffector2D effector;
-                    PhysicsHelper.TryGetPlatformEffector (col, out effector);
+                    PhysicsHelper.TryGetPlatformEffector(col, out effector);
                     FallthroughReseter reseter = effector.gameObject.AddComponent<FallthroughReseter>();
                     reseter.StartFall(effector);
                     //set invincible for half a second when falling through a platform, as it will make the player "standup"
@@ -663,7 +686,8 @@ namespace Gamekit2D
                     m_ShootingCoroutine = StartCoroutine(Shoot());
             }
 
-            if ((PlayerInput.Instance.RangedAttack.Up || !m_Animator.GetBool(m_HashHoldingGunPara)) && m_ShootingCoroutine != null)
+            if ((PlayerInput.Instance.RangedAttack.Up || !m_Animator.GetBool(m_HashHoldingGunPara)) &&
+                m_ShootingCoroutine != null)
             {
                 StopCoroutine(m_ShootingCoroutine);
                 m_ShootingCoroutine = null;
@@ -709,14 +733,14 @@ namespace Gamekit2D
             m_Animator.SetTrigger(m_HashHurtPara);
 
             //we only force respawn if helath > 0, otherwise both forceRespawn & Death trigger are set in the animator, messing with each other.
-            if(damageable.CurrentHealth > 0 && damager.forceRespawn)
+            if (damageable.CurrentHealth > 0 && damager.forceRespawn)
                 m_Animator.SetTrigger(m_HashForcedRespawnPara);
 
             m_Animator.SetBool(m_HashGroundedPara, false);
             hurtAudioPlayer.PlayRandomSound();
 
             //if the health is < 0, mean die callback will take care of respawn
-            if(damager.forceRespawn && damageable.CurrentHealth > 0)
+            if (damager.forceRespawn && damageable.CurrentHealth > 0)
             {
                 StartCoroutine(DieRespawnCoroutine(false, true));
             }
@@ -733,9 +757,10 @@ namespace Gamekit2D
         {
             PlayerInput.Instance.ReleaseControl(true);
             yield return new WaitForSeconds(1.0f); //wait one second before respawing
-            yield return StartCoroutine(ScreenFader.FadeSceneOut(useCheckPoint ? ScreenFader.FadeType.Black : ScreenFader.FadeType.GameOver));
-            if(!useCheckPoint)
-                yield return new WaitForSeconds (2f);
+            yield return StartCoroutine(
+                ScreenFader.FadeSceneOut(useCheckPoint ? ScreenFader.FadeType.Black : ScreenFader.FadeType.GameOver));
+            if (!useCheckPoint)
+                yield return new WaitForSeconds(2f);
             Respawn(resetHealth, useCheckPoint);
             yield return new WaitForEndOfFrame();
             yield return StartCoroutine(ScreenFader.FadeSceneIn());
@@ -777,7 +802,8 @@ namespace Gamekit2D
 
         public void TeleportToColliderBottom()
         {
-            Vector2 colliderBottom = m_CharacterController2D.Rigidbody2D.position + m_Capsule.offset + Vector2.down * m_Capsule.size.y * 0.5f;
+            Vector2 colliderBottom = m_CharacterController2D.Rigidbody2D.position + m_Capsule.offset +
+                                     Vector2.down * m_Capsule.size.y * 0.5f;
             m_CharacterController2D.Teleport(colliderBottom);
         }
 
@@ -797,7 +823,8 @@ namespace Gamekit2D
             //we reset the hurt trigger, as we don't want the player to go back to hurt animation once respawned
             m_Animator.ResetTrigger(m_HashHurtPara);
             if (m_FlickerCoroutine != null)
-            {//we stop flcikering for the same reason
+            {
+                //we stop flcikering for the same reason
                 StopFlickering();
             }
 

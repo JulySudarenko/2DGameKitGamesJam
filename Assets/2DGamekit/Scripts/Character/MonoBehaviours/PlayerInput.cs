@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Gamekit2D
 {
@@ -21,7 +22,7 @@ namespace Gamekit2D
         public InputButton Interact = new InputButton(KeyCode.E, XboxControllerButtons.Y);
         public InputButton MeleeAttack = new InputButton(KeyCode.K, XboxControllerButtons.X);
         public InputButton RangedAttack = new InputButton(KeyCode.O, XboxControllerButtons.B);
-        public InputButton Artefact = new InputButton(KeyCode.L, XboxControllerButtons.LeftBumper);
+        [FormerlySerializedAs("Artefact")] public InputButton Artifact = new InputButton(KeyCode.L, XboxControllerButtons.LeftBumper);
         public InputButton Jump = new InputButton(KeyCode.Space, XboxControllerButtons.A);
         public InputAxis Horizontal = new InputAxis(KeyCode.D, KeyCode.A, XboxControllerAxes.LeftstickHorizontal);
         public InputAxis Vertical = new InputAxis(KeyCode.W, KeyCode.S, XboxControllerAxes.LeftstickVertical);
@@ -64,7 +65,7 @@ namespace Gamekit2D
             Interact.Get(fixedUpdateHappened, inputType);
             MeleeAttack.Get(fixedUpdateHappened, inputType);
             RangedAttack.Get(fixedUpdateHappened, inputType);
-            Artefact.Get(fixedUpdateHappened, inputType);
+            Artifact.Get(fixedUpdateHappened, inputType);
             Jump.Get(fixedUpdateHappened, inputType);
             Horizontal.Get(inputType);
             Vertical.Get(inputType);
@@ -83,7 +84,7 @@ namespace Gamekit2D
             GainControl(Interact);
             GainControl(MeleeAttack);
             GainControl(RangedAttack);
-            GainControl(Artefact);
+            GainControl(Artifact);
             GainControl(Jump);
             GainControl(Horizontal);
             GainControl(Vertical);
@@ -97,7 +98,7 @@ namespace Gamekit2D
             ReleaseControl(Interact, resetValues);
             ReleaseControl(MeleeAttack, resetValues);
             ReleaseControl(RangedAttack, resetValues);
-            ReleaseControl(Artefact, resetValues);
+            ReleaseControl(Artifact, resetValues);
             ReleaseControl(Jump, resetValues);
             ReleaseControl(Horizontal, resetValues);
             ReleaseControl(Vertical, resetValues);
@@ -125,12 +126,12 @@ namespace Gamekit2D
 
         public void DisableArtefact()
         {
-            Artefact.Disable();
+            Artifact.Disable();
         }
 
         public void EnableArtefact()
         {
-            Artefact.Enable();
+            Artifact.Enable();
         }
 
         public DataSettings GetDataSettings()
@@ -146,7 +147,7 @@ namespace Gamekit2D
 
         public Data SaveData()
         {
-            return new Data<bool, bool, bool>(MeleeAttack.Enabled, RangedAttack.Enabled, Artefact.Enabled);
+            return new Data<bool, bool, bool>(MeleeAttack.Enabled, RangedAttack.Enabled, Artifact.Enabled);
         }
 
         public void LoadData(Data data)
@@ -164,9 +165,9 @@ namespace Gamekit2D
                 RangedAttack.Disable();
 
             if (playerInputData.value1)
-                Artefact.Enable();
+                Artifact.Enable();
             else
-                Artefact.Disable();
+                Artifact.Disable();
         }
 
         void OnGUI()

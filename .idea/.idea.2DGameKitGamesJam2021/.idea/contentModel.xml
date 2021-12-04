@@ -97,6 +97,13 @@
               <e p="SpriteColorChange.cs" t="Include" />
               <e p="WaterArea.cs" t="Include" />
             </e>
+            <e p="JulySudarenko" t="Include">
+              <e p="Artifact.cs" t="Include" />
+              <e p="ArtifactSettings.cs" t="Include" />
+              <e p="Gravitation.cs" t="Include" />
+              <e p="IArtifact.cs" t="Include" />
+              <e p="IGravity.cs" t="Include" />
+            </e>
             <e p="Localization" t="Include">
               <e p="Editor" t="Include">
                 <e p="PhraseDrawer.cs" t="Include" />

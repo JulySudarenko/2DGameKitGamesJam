@@ -168,6 +168,9 @@ GameObject:
   - component: {fileID: 114460243114916098}
   - component: {fileID: 114680495344679792}
   - component: {fileID: 114621962236214084}
+  - component: {fileID: 3064868616745827154}
+  - component: {fileID: 8935002206263253730}
+  - component: {fileID: -5260986667900719899}
   m_Layer: 13
   m_Name: Ellen
   m_TagString: Untagged
@@ -709,6 +712,71 @@ MonoBehaviour:
   dataSettings:
     dataTag: inventory
     persistenceType: 3
+--- !u!114 &3064868616745827154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125256590603436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1506f7b67235554cb42519c257da979, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  offset: {x: 0.05947697, y: -0.45177293}
+  size: {x: 2.2892187, y: 0.20983171}
+  offsetBasedOnSpriteFacing: 1
+  spriteRenderer: {fileID: 212611162554739646}
+  canHitTriggers: 0
+  disableDamageAfterHit: 0
+  forceRespawn: 0
+  ignoreInvincibility: 0
+  hittableLayers:
+    serializedVersion: 2
+    m_Bits: 66048
+  OnDamageableHit:
+    m_PersistentCalls:
+      m_Calls: []
+  OnNonDamageableHit:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!58 &8935002206263253730
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125256590603436}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.011838675, y: 2.6787498}
+  serializedVersion: 2
+  m_Radius: 0.2567041
+--- !u!114 &-5260986667900719899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125256590603436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8e21b9dda9c4068b3a92d9afd78979a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  JumpArtefactDamager: {fileID: 3064868616745827154}
+  CellingCollider: {fileID: 8935002206263253730}
+  NormalGravity: {x: 0, y: -9.81}
+  ArtefactGravity: {x: 0, y: 9.81}
+  ArtefactForceGravity: -200
+  Charge: 10
+  ImprovedCharge: 1000
 --- !u!1 &1181578502863468
 GameObject:
   m_ObjectHideFlags: 0
