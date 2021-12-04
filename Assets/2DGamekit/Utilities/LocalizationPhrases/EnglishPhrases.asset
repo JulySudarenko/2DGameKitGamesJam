@@ -27,3 +27,5 @@ MonoBehaviour:
   - key: INFOPOST4
     value: "\u201CWhat amazing treasures can be found here, I feel like I can now
       walk upside down. Press L for move on the ceiling like on the floor.\u201D"
+  - key: INFOPOST5
+    value: "\u201CWell, its looks like my artifact is now capable of more.\u201D"

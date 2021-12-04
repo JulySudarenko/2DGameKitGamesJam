@@ -1,15 +1,17 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Gamekit2D
 {
-    internal sealed class Artifact : IArtifact
+    internal sealed class Artifact : IArtifact, IDisposable
     {
-        private IGravity _gravity;
-        private ArtifactSettings _settings;
+        private readonly IGravity _gravity;
+        private readonly ArtifactSettings _settings;
         private CharacterController2D _characterController2D;
-        private RandomAudioPlayer _crushSound;
-        private float _normalGravityForce;
+        private readonly RandomAudioPlayer _crushSound;
+        private readonly float _normalGravityForce;
         private float _charge;
+        private float _maxCharge;
         private bool _isActivate;
 
         public Artifact(ArtifactSettings settings, CharacterController2D characterController2D,
@@ -21,11 +23,13 @@ namespace Gamekit2D
             _gravity = gravity;
             _crushSound = crushSound;
             _charge = _settings.Charge;
+            _maxCharge = _settings.Charge;
         }
 
         public void Init()
         {
-            _settings.JumpArtefactDamager.DisableDamage();
+            _settings.JumpArtifactDamager.DisableDamage();
+            _settings.OnImprovedCharge += ImproveCharge;
         }
 
         public void ApplyArtifactAbility()
@@ -33,10 +37,11 @@ namespace Gamekit2D
             if (_charge > 0)
             {
                 CheckInput();
-                
+
                 if (_isActivate)
                 {
                     _charge -= Time.deltaTime;
+                    _settings.ArtifactView.ArtifactActivate(_maxCharge, _charge);
                 }
             }
             else
@@ -57,7 +62,7 @@ namespace Gamekit2D
                 }
                 else
                 {
-                    _gravity.SetGravity(_settings.ArtefactGravity, _settings.ArtefactForceGravity);
+                    _gravity.SetGravity(_settings.ArtifactGravity, _settings.ArtifactForceGravity);
                     _isActivate = true;
                 }
             }
@@ -67,10 +72,27 @@ namespace Gamekit2D
         {
             if (PlayerInput.Instance.Artifact.Up && !_isActivate)
             {
-                _settings.JumpArtefactDamager.EnableDamage();
-                _settings.JumpArtefactDamager.disableDamageAfterHit = true;
+                _settings.JumpArtifactDamager.EnableDamage();
+                _settings.JumpArtifactDamager.disableDamageAfterHit = true;
                 _crushSound.PlayRandomSound();
             }
+        }
+
+        private void ImproveCharge()
+        {
+            _charge += _settings.ImprovedCharge;
+            _maxCharge = _settings.MaxCharge;
+            if (_charge > _maxCharge)
+            {
+                _charge = _maxCharge;
+            }
+
+            _settings.ArtifactView.ArtifactActivate(_maxCharge, _charge);
+        }
+
+        public void Dispose()
+        {
+            _settings.OnImprovedCharge -= ImproveCharge;
         }
     }
 }

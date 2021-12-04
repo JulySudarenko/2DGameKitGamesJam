@@ -145,7 +145,8 @@ namespace Gamekit2D
             _artifactSettings = GetComponent<ArtifactSettings>();
             _gravitation = new Gravitation();
             _gravitation.SetGravity(_artifactSettings.NormalGravity, gravity);
-            _artifact = new Artifact(_artifactSettings, m_CharacterController2D, gravity, _gravitation, meleeAttackAudioPlayer);
+            _artifact = new Artifact(_artifactSettings, m_CharacterController2D, gravity, _gravitation,
+                meleeAttackAudioPlayer);
         }
 
         void Start()
@@ -231,9 +232,7 @@ namespace Gamekit2D
             UpdateCameraFollowTargetPosition();
 
             _artifact.ApplyArtifactAbility();
-            gravity = _gravitation.GravityForce;
             _artifact.ApplyCrushAbility();
-            //ActivateArtifactAbility();
         }
 
         public void Unpause()

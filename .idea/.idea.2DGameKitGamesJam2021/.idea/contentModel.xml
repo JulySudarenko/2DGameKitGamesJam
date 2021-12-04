@@ -100,7 +100,9 @@
             <e p="JulySudarenko" t="Include">
               <e p="Artifact.cs" t="Include" />
               <e p="ArtifactSettings.cs" t="Include" />
+              <e p="ArtifactUI.cs" t="Include" />
               <e p="Gravitation.cs" t="Include" />
+              <e p="GravityCompensator.cs" t="Include" />
               <e p="IArtifact.cs" t="Include" />
               <e p="IGravity.cs" t="Include" />
             </e>

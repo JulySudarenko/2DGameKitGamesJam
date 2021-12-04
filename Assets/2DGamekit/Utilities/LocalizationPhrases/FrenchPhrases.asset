@@ -22,4 +22,6 @@ MonoBehaviour:
     value: '[Jumping down]'
   - key: INFOPOST4
     value: '[Jumping down]'
+  - key: INFOPOST5
+    value: '[Jumping down]'
   originalPhrases: {fileID: 11400000, guid: 9cc6d1d2be2e5d446a3ab8b4f207bb66, type: 2}

@@ -29,6 +29,7 @@ namespace Gamekit2D
         protected Rigidbody2D m_Rigidbody2D;
         protected bool m_Grounded;
         Collider2D[] m_WaterColliders;
+        private GravityCompensator _compensator;
 
         void Awake()
         {
@@ -56,6 +57,7 @@ namespace Gamekit2D
             {
                 m_WaterColliders[i] = waterAreas[i].GetComponent<Collider2D>();
             }
+            _compensator = new GravityCompensator(m_Rigidbody2D);
         }
 
         void FixedUpdate()
@@ -65,7 +67,8 @@ namespace Gamekit2D
             m_Rigidbody2D.velocity = velocity;
 
             CheckGrounded();
-
+            _compensator.CheckAndCompensateGravity();
+            
             for (int i = 0; i < m_WaterColliders.Length; i++)
             {
                 if (m_Rigidbody2D.IsTouching(m_WaterColliders[i]))
@@ -73,6 +76,7 @@ namespace Gamekit2D
                     m_Rigidbody2D.constraints |= RigidbodyConstraints2D.FreezePositionX;
                 }
             }
+
         }
 
         public void StartPushing()

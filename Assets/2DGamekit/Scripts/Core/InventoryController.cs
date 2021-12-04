@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using BTAI;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -33,13 +34,14 @@ namespace Gamekit2D
                             return false;
                         }
                     }
+
                     OnHasItem.Invoke();
                     return true;
                 }
+
                 return false;
             }
         }
-
 
         public InventoryEvent[] inventoryEvents;
         public event System.Action OnInventoryLoaded;
@@ -75,7 +77,10 @@ namespace Gamekit2D
             {
                 m_InventoryItems.Add(key);
                 var ev = GetInventoryEvent(key);
-                if (ev != null) ev.OnAdd.Invoke();
+                if (ev != null)
+                {
+                    ev.OnAdd.Invoke();
+                }
             }
         }
 
@@ -105,6 +110,7 @@ namespace Gamekit2D
             {
                 if (iv.key == key) return iv;
             }
+
             return null;
         }
 
@@ -126,7 +132,7 @@ namespace Gamekit2D
 
         public void LoadData(Data data)
         {
-            Data<HashSet<string>> inventoryData = (Data<HashSet<string>>)data;
+            Data<HashSet<string>> inventoryData = (Data<HashSet<string>>) data;
             foreach (var i in inventoryData.value)
                 AddItem(i);
             if (OnInventoryLoaded != null) OnInventoryLoaded();

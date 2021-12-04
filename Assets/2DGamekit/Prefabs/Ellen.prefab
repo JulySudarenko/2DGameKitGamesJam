@@ -169,7 +169,6 @@ GameObject:
   - component: {fileID: 114680495344679792}
   - component: {fileID: 114621962236214084}
   - component: {fileID: 3064868616745827154}
-  - component: {fileID: 8935002206263253730}
   - component: {fileID: -5260986667900719899}
   m_Layer: 13
   m_Name: Ellen
@@ -354,7 +353,7 @@ MonoBehaviour:
     key: 111
     controllerButton: 10
     m_Enabled: 0
-  Artefact:
+  Artifact:
     key: 108
     controllerButton: 9
     m_Enabled: 0
@@ -678,13 +677,13 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  - key: Artefact
+  - key: Artifact
     OnAdd:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 114734347468151670}
           m_TargetAssemblyTypeName: Gamekit2D.PlayerInput, Assembly-CSharp
-          m_MethodName: EnableArtefact
+          m_MethodName: EnableArtifact
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -699,7 +698,38 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 114734347468151670}
           m_TargetAssemblyTypeName: Gamekit2D.PlayerInput, Assembly-CSharp
-          m_MethodName: DisableArtefact
+          m_MethodName: DisableArtifact
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - key: "\u0421harge"
+    OnAdd:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114734347468151670}
+          m_TargetAssemblyTypeName: Gamekit2D.PlayerInput, Assembly-CSharp
+          m_MethodName: EnableArtifact
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnRemove:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114734347468151670}
+          m_TargetAssemblyTypeName: Gamekit2D.PlayerInput, Assembly-CSharp
+          m_MethodName: DisableArtifact
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -742,22 +772,6 @@ MonoBehaviour:
   OnNonDamageableHit:
     m_PersistentCalls:
       m_Calls: []
---- !u!58 &8935002206263253730
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1125256590603436}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.011838675, y: 2.6787498}
-  serializedVersion: 2
-  m_Radius: 0.2567041
 --- !u!114 &-5260986667900719899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -770,13 +784,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8e21b9dda9c4068b3a92d9afd78979a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpArtefactDamager: {fileID: 3064868616745827154}
-  CellingCollider: {fileID: 8935002206263253730}
+  JumpArtifactDamager: {fileID: 3064868616745827154}
+  ArtifactView: {fileID: 0}
   NormalGravity: {x: 0, y: -9.81}
-  ArtefactGravity: {x: 0, y: 9.81}
-  ArtefactForceGravity: -200
+  ArtifactGravity: {x: 0, y: 9.81}
+  ArtifactForceGravity: -100
   Charge: 10
   ImprovedCharge: 1000
+  MaxCharge: 80
 --- !u!1 &1181578502863468
 GameObject:
   m_ObjectHideFlags: 0
