@@ -9,7 +9,7 @@ namespace Gamekit2D
         public Image ChargeIconPrefab;
         private readonly Text _gamePointsLabel;
 
-        public void ArtifactActivate(float maxCharge, float charge)
+        public void ShowPower(float maxCharge, float charge)
         {
             ChargeIconPrefab.fillAmount = charge / maxCharge;
         }

@@ -788,10 +788,10 @@ MonoBehaviour:
   ArtifactView: {fileID: 0}
   NormalGravity: {x: 0, y: -9.81}
   ArtifactGravity: {x: 0, y: 9.81}
-  ArtifactForceGravity: -100
+  ArtifactForceGravity: -38
   Charge: 10
-  ImprovedCharge: 1000
-  MaxCharge: 80
+  ImprovedCharge: 18
+  MaxCharge: 18
 --- !u!1 &1181578502863468
 GameObject:
   m_ObjectHideFlags: 0

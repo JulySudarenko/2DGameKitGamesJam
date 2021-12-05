@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using Action = System.Action;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
@@ -9,23 +8,25 @@ namespace Gamekit2D
     internal sealed class Artifact : IDisposable
     {
         public Action<bool> IsArtifactApply;
-        private readonly IGravity _gravity;
+        private readonly Gravitation _gravity;
         private readonly ArtifactSettings _settings;
         private readonly CharacterController2D _characterController2D;
         private readonly RandomAudioPlayer _crushSound;
-        private Quaternion _quaternion;
-        private Quaternion _quaternionRotation;
-        private Quaternion _quaternionRotationZ;
-        private Quaternion _quaternionRotationY;
+        private readonly Quaternion _quaternion;
+        private readonly Quaternion _quaternionRotation;
         private readonly float _normalGravityForce;
+        private Quaternion _characterRotation;
         private float _charge;
         private float _maxCharge;
+        private float _push = 2.5f;
+        private float _rotationSpeed = 4.0f;
         private float _timer = 0.0f;
-        private float _maxPushTime = 0.2f;
+        private float _maxPushTime = 0.3f;
         private bool _isActivate;
 
+
         public Artifact(ArtifactSettings settings, CharacterController2D characterController2D,
-            float normalGravityForce, IGravity gravity, RandomAudioPlayer crushSound)
+            float normalGravityForce, Gravitation gravity, RandomAudioPlayer crushSound)
         {
             _settings = settings;
             _normalGravityForce = normalGravityForce;
@@ -36,8 +37,6 @@ namespace Gamekit2D
             _maxCharge = _settings.Charge;
             _quaternion = Quaternion.Euler(0f, 0f, 0f);
             _quaternionRotation = Quaternion.Euler(0f, 180f, 180f);
-            _quaternionRotationZ = Quaternion.Euler(0f, 0f, 180f);
-            _quaternionRotationY = Quaternion.Euler(0f, 180f, 0f);
             _isActivate = false;
         }
 
@@ -45,13 +44,15 @@ namespace Gamekit2D
         {
             _settings.JumpArtifactDamager.DisableDamage();
             _settings.OnImprovedCharge += ImproveCharge;
+            _settings.OnGetArtifact += InitIconView;
+            InitIconView();
         }
 
         public void ApplyArtifactAbility()
         {
             if (PlayerInput.Instance.Artifact.Held && _charge > 0)
             {
-                _settings.ArtifactView.ArtifactActivate(_maxCharge, _charge);
+                _settings.ArtifactView.ShowPower(_maxCharge, _charge);
                 _gravity.SetGravity(_settings.ArtifactGravity, _settings.ArtifactForceGravity);
                 _isActivate = true;
                 IsArtifactApply.Invoke(_isActivate);
@@ -84,17 +85,19 @@ namespace Gamekit2D
 
         private void Rotate()
         {
-            if (_isActivate && _characterController2D.transform.rotation.z != _quaternionRotation.z)
+            _characterRotation = _characterController2D.transform.rotation;
+
+            if (_isActivate && _characterRotation.z != _quaternionRotation.z)
             {
                 _characterController2D.transform.rotation =
                     Quaternion.Lerp(_characterController2D.transform.rotation, _quaternionRotation,
-                        4f * Time.deltaTime);
+                        _rotationSpeed * Time.deltaTime);
             }
 
-            if (!_isActivate && _characterController2D.transform.rotation.z != _quaternion.z)
+            if (!_isActivate && _characterRotation.z != _quaternion.z)
             {
                 _characterController2D.transform.rotation =
-                    Quaternion.Lerp(_quaternion, _quaternion, 4f * Time.deltaTime);
+                    Quaternion.Lerp(_quaternion, _quaternion, _rotationSpeed * Time.deltaTime);
             }
         }
 
@@ -107,7 +110,19 @@ namespace Gamekit2D
 
             if (_timer > _maxPushTime)
             {
-                _characterController2D.transform.position += Vector3.down * 2.5f;
+                _characterController2D.transform.position += Vector3.down * _push;
+            }
+        }
+
+        private void InitIconView()
+        {
+            if (PlayerInput.Instance.Artifact.Enabled)
+            {
+                _settings.ArtifactView.ActivateDeactivate(true);
+            }
+            else
+            {
+                _settings.ArtifactView.ActivateDeactivate(false);
             }
         }
 
@@ -120,12 +135,13 @@ namespace Gamekit2D
                 _charge = _maxCharge;
             }
 
-            _settings.ArtifactView.ArtifactActivate(_maxCharge, _charge);
+            _settings.ArtifactView.ShowPower(_maxCharge, _charge);
         }
 
         public void Dispose()
         {
             _settings.OnImprovedCharge -= ImproveCharge;
+            _settings.OnGetArtifact -= InitIconView;
         }
     }
 }

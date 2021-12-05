@@ -121,13 +121,12 @@ namespace Gamekit2D
             k_GroundedStickingVelocityMultiplier =
                 3f; // This is to help the character stick to vertically moving platforms.
 
-        private ArtifactSettings _artifactSettings;
-        private Artifact _artifact;
-        private IGravity _gravitation;
-        private bool _isArtifactApplied;
-
         //used in non alloc version of physic function
         protected ContactPoint2D[] m_ContactsBuffer = new ContactPoint2D[16];
+
+        private Artifact _artifact;
+        private Gravitation _gravitation;
+        private bool _isArtifactApplied;
 
         // MonoBehaviour Messages - called by Unity internally.
         void Awake()
@@ -143,10 +142,10 @@ namespace Gamekit2D
             m_CurrentBulletSpawnPoint =
                 spriteOriginallyFacesLeft ? facingLeftBulletSpawnPoint : facingRightBulletSpawnPoint;
 
-            _artifactSettings = GetComponent<ArtifactSettings>();
+            var artifactSettings = GetComponent<ArtifactSettings>();
             _gravitation = new Gravitation();
-            _gravitation.SetGravity(_artifactSettings.NormalGravity, gravity);
-            _artifact = new Artifact(_artifactSettings, m_CharacterController2D, gravity, _gravitation,
+            _gravitation.SetGravity(artifactSettings.NormalGravity, gravity);
+            _artifact = new Artifact(artifactSettings, m_CharacterController2D, gravity, _gravitation,
                 meleeAttackAudioPlayer);
         }
 
@@ -236,18 +235,7 @@ namespace Gamekit2D
             _artifact.ApplyArtifactAbility();
         }
 
-        private void OnArtifactAppliedChange(bool value)
-        {
-            _isArtifactApplied = value;
-            if (value)
-            {
-                m_CharacterController2D.groundedRaycastDistance = 1f;
-            }
-            else
-            {
-                m_CharacterController2D.groundedRaycastDistance = 0.1f;
-            }
-        }
+        private void OnArtifactAppliedChange(bool value) => _isArtifactApplied = value;
 
         public void Unpause()
         {
@@ -496,7 +484,6 @@ namespace Gamekit2D
                 grounded = true;
             }
 
-            Debug.Log(grounded);
             if (grounded)
             {
                 FindCurrentSurface();
@@ -596,7 +583,7 @@ namespace Gamekit2D
 
         public void UpdateJump()
         {
-            if(!_isArtifactApplied)
+            if (!_isArtifactApplied)
             {
                 if (!PlayerInput.Instance.Jump.Held && m_MoveVector.y > 0.0f)
                 {

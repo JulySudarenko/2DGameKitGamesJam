@@ -5,6 +5,7 @@ namespace Gamekit2D
 {
     public class ArtifactSettings : MonoBehaviour
     {
+        public Action OnGetArtifact;
         public Action OnImprovedCharge;
         
         public Damager JumpArtifactDamager;
@@ -16,6 +17,11 @@ namespace Gamekit2D
         public float ImprovedCharge = 50.0f;
         public float MaxCharge = 80.0f;
 
+        public void GetArtifact()
+        {
+            OnGetArtifact();
+        }
+        
         public void SetImprovedCharge()
         {
             OnImprovedCharge?.Invoke();
