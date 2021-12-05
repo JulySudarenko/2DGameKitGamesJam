@@ -33,7 +33,6 @@ namespace Gamekit2D
             _characterController2D = characterController2D;
             _gravity = gravity;
             _crushSound = crushSound;
-            _charge = _settings.Charge;
             _maxCharge = _settings.Charge;
             _quaternion = Quaternion.Euler(0f, 0f, 0f);
             _quaternionRotation = Quaternion.Euler(0f, 180f, 180f);
@@ -44,7 +43,8 @@ namespace Gamekit2D
         {
             _settings.JumpArtifactDamager.DisableDamage();
             _settings.OnImprovedCharge += ImproveCharge;
-            _settings.OnGetArtifact += InitIconView;
+            _settings.OnGetArtifact += HasArtifact;
+
             InitIconView();
         }
 
@@ -116,7 +116,7 @@ namespace Gamekit2D
 
         private void InitIconView()
         {
-            if (PlayerInput.Instance.Artifact.Enabled)
+            if (_charge > 0)
             {
                 _settings.ArtifactView.ActivateDeactivate(true);
             }
@@ -124,6 +124,15 @@ namespace Gamekit2D
             {
                 _settings.ArtifactView.ActivateDeactivate(false);
             }
+        }
+
+        private void HasArtifact()
+        {
+            _charge = _settings.Charge;
+            _maxCharge = _settings.Charge;
+
+            InitIconView();
+            _settings.ArtifactView.ShowPower(_maxCharge, _charge);
         }
 
         private void ImproveCharge()
@@ -135,6 +144,7 @@ namespace Gamekit2D
                 _charge = _maxCharge;
             }
 
+            InitIconView();
             _settings.ArtifactView.ShowPower(_maxCharge, _charge);
         }
 
