@@ -3,8 +3,9 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -18,5 +19,9 @@ MonoBehaviour:
   - key: INFOPOST2
     value: '[Jumping down]'
   - key: INFOPOST3
+    value: '[Jumping down]'
+  - key: INFOPOST4
+    value: '[Jumping down]'
+  - key: INFOPOST5
     value: '[Jumping down]'
   originalPhrases: {fileID: 11400000, guid: 9cc6d1d2be2e5d446a3ab8b4f207bb66, type: 2}

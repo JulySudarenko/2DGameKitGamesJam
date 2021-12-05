@@ -168,6 +168,8 @@ GameObject:
   - component: {fileID: 114460243114916098}
   - component: {fileID: 114680495344679792}
   - component: {fileID: 114621962236214084}
+  - component: {fileID: 3064868616745827154}
+  - component: {fileID: -5260986667900719899}
   m_Layer: 13
   m_Name: Ellen
   m_TagString: Untagged
@@ -214,6 +216,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -350,6 +353,10 @@ MonoBehaviour:
     key: 111
     controllerButton: 10
     m_Enabled: 0
+  Artifact:
+    key: 108
+    controllerButton: 9
+    m_Enabled: 0
   Jump:
     key: 32
     controllerButton: 1
@@ -435,6 +442,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
         m_MethodName: SetInitialHeartCount
         m_Mode: 0
         m_Arguments:
@@ -446,6 +454,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 1
       - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
         m_MethodName: ChangeHitPointUI
         m_Mode: 0
         m_Arguments:
@@ -460,6 +469,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114854669915511232}
+        m_TargetAssemblyTypeName: 
         m_MethodName: OnHurt
         m_Mode: 0
         m_Arguments:
@@ -474,6 +484,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114854669915511232}
+        m_TargetAssemblyTypeName: 
         m_MethodName: OnDie
         m_Mode: 1
         m_Arguments:
@@ -552,6 +563,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 114854669915511232}
+          m_TargetAssemblyTypeName: 
           m_MethodName: KeyInventoryEvent
           m_Mode: 1
           m_Arguments:
@@ -570,6 +582,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 114854669915511232}
+          m_TargetAssemblyTypeName: 
           m_MethodName: KeyInventoryEvent
           m_Mode: 1
           m_Arguments:
@@ -588,6 +601,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 114854669915511232}
+          m_TargetAssemblyTypeName: 
           m_MethodName: KeyInventoryEvent
           m_Mode: 1
           m_Arguments:
@@ -606,6 +620,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 114734347468151670}
+          m_TargetAssemblyTypeName: 
           m_MethodName: EnableMeleeAttacking
           m_Mode: 1
           m_Arguments:
@@ -620,6 +635,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 114734347468151670}
+          m_TargetAssemblyTypeName: 
           m_MethodName: DisableMeleeAttacking
           m_Mode: 1
           m_Arguments:
@@ -635,6 +651,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 114734347468151670}
+          m_TargetAssemblyTypeName: 
           m_MethodName: EnableRangedAttacking
           m_Mode: 1
           m_Arguments:
@@ -649,7 +666,70 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 114734347468151670}
+          m_TargetAssemblyTypeName: 
           m_MethodName: DisableRangedAttacking
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - key: Artifact
+    OnAdd:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114734347468151670}
+          m_TargetAssemblyTypeName: Gamekit2D.PlayerInput, Assembly-CSharp
+          m_MethodName: EnableArtifact
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnRemove:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114734347468151670}
+          m_TargetAssemblyTypeName: Gamekit2D.PlayerInput, Assembly-CSharp
+          m_MethodName: DisableArtifact
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - key: "\u0421harge"
+    OnAdd:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114734347468151670}
+          m_TargetAssemblyTypeName: Gamekit2D.PlayerInput, Assembly-CSharp
+          m_MethodName: EnableArtifact
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    OnRemove:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 114734347468151670}
+          m_TargetAssemblyTypeName: Gamekit2D.PlayerInput, Assembly-CSharp
+          m_MethodName: DisableArtifact
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -662,6 +742,56 @@ MonoBehaviour:
   dataSettings:
     dataTag: inventory
     persistenceType: 3
+--- !u!114 &3064868616745827154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125256590603436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1506f7b67235554cb42519c257da979, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  offset: {x: 0.05947697, y: 0.8536041}
+  size: {x: 2.2892187, y: 3.1445184}
+  offsetBasedOnSpriteFacing: 1
+  spriteRenderer: {fileID: 212611162554739646}
+  canHitTriggers: 0
+  disableDamageAfterHit: 0
+  forceRespawn: 0
+  ignoreInvincibility: 0
+  hittableLayers:
+    serializedVersion: 2
+    m_Bits: 66048
+  OnDamageableHit:
+    m_PersistentCalls:
+      m_Calls: []
+  OnNonDamageableHit:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &-5260986667900719899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125256590603436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8e21b9dda9c4068b3a92d9afd78979a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  JumpArtifactDamager: {fileID: 3064868616745827154}
+  ArtifactView: {fileID: 0}
+  NormalGravity: {x: 0, y: -9.81}
+  ArtifactGravity: {x: 0, y: 9.81}
+  ArtifactForceGravity: -38
+  Charge: 10
+  ImprovedCharge: 18
+  MaxCharge: 18
 --- !u!1 &1181578502863468
 GameObject:
   m_ObjectHideFlags: 0
@@ -899,6 +1029,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1230,6 +1361,7 @@ Light:
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!1 &1656601937457706
@@ -1765,5 +1897,6 @@ Light:
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
