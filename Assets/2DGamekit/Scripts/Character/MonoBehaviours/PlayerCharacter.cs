@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Action = System.Action;
 
 namespace Gamekit2D
 {
@@ -120,10 +122,9 @@ namespace Gamekit2D
                 3f; // This is to help the character stick to vertically moving platforms.
 
         private ArtifactSettings _artifactSettings;
-        private IArtifact _artifact;
+        private Artifact _artifact;
         private IGravity _gravitation;
-        private float _jumpArtefactHeight;
-        private bool _isArtefact;
+        private bool _isArtifactApplied;
 
         //used in non alloc version of physic function
         protected ContactPoint2D[] m_ContactsBuffer = new ContactPoint2D[16];
@@ -179,6 +180,7 @@ namespace Gamekit2D
             m_StartingFacingLeft = GetFacing() < 0.0f;
 
             _artifact.Init();
+            _artifact.IsArtifactApply += OnArtifactAppliedChange;
         }
 
         void OnTriggerEnter2D(Collider2D other)
@@ -232,7 +234,19 @@ namespace Gamekit2D
             UpdateCameraFollowTargetPosition();
 
             _artifact.ApplyArtifactAbility();
-            _artifact.ApplyCrushAbility();
+        }
+
+        private void OnArtifactAppliedChange(bool value)
+        {
+            _isArtifactApplied = value;
+            if (value)
+            {
+                m_CharacterController2D.groundedRaycastDistance = 1f;
+            }
+            else
+            {
+                m_CharacterController2D.groundedRaycastDistance = 0.1f;
+            }
         }
 
         public void Unpause()
@@ -421,6 +435,12 @@ namespace Gamekit2D
             bool faceLeft = PlayerInput.Instance.Horizontal.Value < 0f;
             bool faceRight = PlayerInput.Instance.Horizontal.Value > 0f;
 
+            // if (_isArtifactApplied)
+            // {
+            //     faceRight = PlayerInput.Instance.Horizontal.Value < 0f;
+            //     faceLeft = PlayerInput.Instance.Horizontal.Value > 0f;
+            // }
+
             if (faceLeft)
             {
                 spriteRenderer.flipX = !spriteOriginallyFacesLeft;
@@ -471,6 +491,12 @@ namespace Gamekit2D
             bool wasGrounded = m_Animator.GetBool(m_HashGroundedPara);
             bool grounded = m_CharacterController2D.IsGrounded;
 
+            if (_isArtifactApplied)
+            {
+                grounded = true;
+            }
+
+            Debug.Log(grounded);
             if (grounded)
             {
                 FindCurrentSurface();
@@ -570,9 +596,12 @@ namespace Gamekit2D
 
         public void UpdateJump()
         {
-            if (!PlayerInput.Instance.Jump.Held && m_MoveVector.y > 0.0f)
+            if(!_isArtifactApplied)
             {
-                m_MoveVector.y -= jumpAbortSpeedReduction * Time.deltaTime;
+                if (!PlayerInput.Instance.Jump.Held && m_MoveVector.y > 0.0f)
+                {
+                    m_MoveVector.y -= jumpAbortSpeedReduction * Time.deltaTime;
+                }
             }
         }
 
@@ -592,7 +621,8 @@ namespace Gamekit2D
 
         public void AirborneVerticalMovement()
         {
-            if (Mathf.Approximately(m_MoveVector.y, 0f) || m_CharacterController2D.IsCeilinged && m_MoveVector.y > 0f)
+            if (Mathf.Approximately(m_MoveVector.y, 0f) ||
+                m_CharacterController2D.IsCeilinged && m_MoveVector.y > 0f)
             {
                 m_MoveVector.y = 0f;
             }
@@ -757,7 +787,9 @@ namespace Gamekit2D
             PlayerInput.Instance.ReleaseControl(true);
             yield return new WaitForSeconds(1.0f); //wait one second before respawing
             yield return StartCoroutine(
-                ScreenFader.FadeSceneOut(useCheckPoint ? ScreenFader.FadeType.Black : ScreenFader.FadeType.GameOver));
+                ScreenFader.FadeSceneOut(useCheckPoint
+                    ? ScreenFader.FadeType.Black
+                    : ScreenFader.FadeType.GameOver));
             if (!useCheckPoint)
                 yield return new WaitForSeconds(2f);
             Respawn(resetHealth, useCheckPoint);
@@ -850,6 +882,11 @@ namespace Gamekit2D
         public void KeyInventoryEvent()
         {
             if (KeyUI.Instance != null) KeyUI.Instance.ChangeKeyUI(m_InventoryController);
+        }
+
+        public void OnDestroy()
+        {
+            if (_artifact.IsArtifactApply != null) _artifact.IsArtifactApply -= OnArtifactAppliedChange;
         }
     }
 }

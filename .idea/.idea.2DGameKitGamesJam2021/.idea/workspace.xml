@@ -22,20 +22,16 @@
     <list default="true" id="1cff0ceb-a3cb-4224-84d1-d08ae71d91bd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.2DGameKitGamesJam2021/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.2DGameKitGamesJam2021/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.2DGameKitGamesJam2021/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.2DGameKitGamesJam2021/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/2DGamekit/GamesJam/Artefact.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/2DGamekit/GamesJam/Artefact.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2DGamekit/GamesJam/ArtifactUI.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2DGamekit/GamesJam/ArtifactUI.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/2DGamekit/Prefabs/Ellen.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2DGamekit/Prefabs/Ellen.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/2DGamekit/Scenes/Zone4.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2DGamekit/Scenes/Zone4.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/2DGamekit/Scenes/Zone5.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2DGamekit/Scenes/Zone5.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2DGamekit/Scripts/Character/MonoBehaviours/CharacterController2D.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2DGamekit/Scripts/Character/MonoBehaviours/CharacterController2D.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/2DGamekit/Scripts/Character/MonoBehaviours/PlayerCharacter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2DGamekit/Scripts/Character/MonoBehaviours/PlayerCharacter.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/2DGamekit/Scripts/Character/MonoBehaviours/PlayerInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2DGamekit/Scripts/Character/MonoBehaviours/PlayerInput.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/2DGamekit/Scripts/Core/InventoryController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2DGamekit/Scripts/Core/InventoryController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/2DGamekit/Scripts/JulySudarenko/Artifact.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2DGamekit/Scripts/JulySudarenko/Artifact.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/2DGamekit/Scripts/JulySudarenko/ArtifactSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2DGamekit/Scripts/JulySudarenko/ArtifactSettings.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/2DGamekit/Scripts/Objects/Pushables/Pushable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2DGamekit/Scripts/Objects/Pushables/Pushable.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/2DGamekit/Utilities/LocalizationPhrases/EnglishPhrases.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2DGamekit/Utilities/LocalizationPhrases/EnglishPhrases.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/2DGamekit/Utilities/LocalizationPhrases/FrenchPhrases.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2DGamekit/Utilities/LocalizationPhrases/FrenchPhrases.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TimeManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TimeManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2DGamekit/Scripts/JulySudarenko/IArtifact.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2DGamekit/Scripts/JulySudarenko/IArtifact.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/Physics2DSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Physics2DSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,11 +62,12 @@
         <option value="$PROJECT_DIR$/Assets/2DGamekit/Scripts/UI/HealthUI.cs" />
         <option value="$PROJECT_DIR$/Assets/2DGamekit/Scripts/Objects/WeaponPickup.cs" />
         <option value="$PROJECT_DIR$/Assets/2DGamekit/Scripts/Core/InventoryController.cs" />
-        <option value="$PROJECT_DIR$/Assets/2DGamekit/Scripts/JulySudarenko/ArtifactSettings.cs" />
-        <option value="$PROJECT_DIR$/Assets/2DGamekit/Scripts/Character/MonoBehaviours/PlayerCharacter.cs" />
-        <option value="$PROJECT_DIR$/Assets/2DGamekit/Scripts/JulySudarenko/Artifact.cs" />
         <option value="$PROJECT_DIR$/Assets/2DGamekit/Scripts/Character/MonoBehaviours/PlayerInput.cs" />
         <option value="$PROJECT_DIR$/Assets/2DGamekit/Scripts/JulySudarenko/ArtifactUI.cs" />
+        <option value="$PROJECT_DIR$/Assets/2DGamekit/Scripts/JulySudarenko/ArtifactSettings.cs" />
+        <option value="$PROJECT_DIR$/Assets/2DGamekit/Scripts/Character/MonoBehaviours/CharacterController2D.cs" />
+        <option value="$PROJECT_DIR$/Assets/2DGamekit/Scripts/Character/MonoBehaviours/PlayerCharacter.cs" />
+        <option value="$PROJECT_DIR$/Assets/2DGamekit/Scripts/JulySudarenko/Artifact.cs" />
       </list>
     </option>
   </component>
@@ -98,10 +95,10 @@
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="27072">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="33832">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="27072" />
+      <option name="pid" value="33832" />
       <option name="selectedOptions">
         <set />
       </option>
@@ -143,73 +140,113 @@
       <screen x="1920" y="-154" width="1536" height="832" />
     </state>
     <state width="502" height="464" key="DebuggerActiveHint/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638607531400" />
-    <state width="1493" height="279" key="GridCell.Tab.0.bottom" timestamp="1638643226069">
+    <state width="1493" height="279" key="GridCell.Tab.0.bottom" timestamp="1638693058253">
       <screen x="1920" y="-154" width="1536" height="832" />
     </state>
-    <state width="1493" height="279" key="GridCell.Tab.0.bottom/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638643226069" />
-    <state width="1493" height="279" key="GridCell.Tab.0.center" timestamp="1638643226069">
+    <state width="1493" height="279" key="GridCell.Tab.0.bottom/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638693058253" />
+    <state width="1493" height="279" key="GridCell.Tab.0.center" timestamp="1638693058253">
       <screen x="1920" y="-154" width="1536" height="832" />
     </state>
-    <state width="1493" height="279" key="GridCell.Tab.0.center/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638643226069" />
-    <state width="1493" height="279" key="GridCell.Tab.0.left" timestamp="1638643226069">
+    <state width="1493" height="279" key="GridCell.Tab.0.center/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638693058253" />
+    <state width="1493" height="279" key="GridCell.Tab.0.left" timestamp="1638693058252">
       <screen x="1920" y="-154" width="1536" height="832" />
     </state>
-    <state width="1493" height="279" key="GridCell.Tab.0.left/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638643226069" />
-    <state width="1493" height="279" key="GridCell.Tab.0.right" timestamp="1638643226069">
+    <state width="1493" height="279" key="GridCell.Tab.0.left/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638693058252" />
+    <state width="1493" height="279" key="GridCell.Tab.0.right" timestamp="1638693058253">
       <screen x="1920" y="-154" width="1536" height="832" />
     </state>
-    <state width="1493" height="279" key="GridCell.Tab.0.right/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638643226069" />
-    <state width="1493" height="279" key="GridCell.Tab.1.bottom" timestamp="1638643226070">
+    <state width="1493" height="279" key="GridCell.Tab.0.right/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638693058253" />
+    <state width="1493" height="279" key="GridCell.Tab.1.bottom" timestamp="1638693058253">
       <screen x="1920" y="-154" width="1536" height="832" />
     </state>
-    <state width="1493" height="279" key="GridCell.Tab.1.bottom/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638643226070" />
-    <state width="1493" height="279" key="GridCell.Tab.1.center" timestamp="1638643226070">
+    <state width="1493" height="279" key="GridCell.Tab.1.bottom/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638693058253" />
+    <state width="1493" height="279" key="GridCell.Tab.1.center" timestamp="1638693058253">
       <screen x="1920" y="-154" width="1536" height="832" />
     </state>
-    <state width="1493" height="279" key="GridCell.Tab.1.center/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638643226070" />
-    <state width="1493" height="279" key="GridCell.Tab.1.left" timestamp="1638643226069">
+    <state width="1493" height="279" key="GridCell.Tab.1.center/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638693058253" />
+    <state width="1493" height="279" key="GridCell.Tab.1.left" timestamp="1638693058253">
       <screen x="1920" y="-154" width="1536" height="832" />
     </state>
-    <state width="1493" height="279" key="GridCell.Tab.1.left/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638643226069" />
-    <state width="1493" height="279" key="GridCell.Tab.1.right" timestamp="1638643226070">
+    <state width="1493" height="279" key="GridCell.Tab.1.left/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638693058253" />
+    <state width="1493" height="279" key="GridCell.Tab.1.right" timestamp="1638693058253">
       <screen x="1920" y="-154" width="1536" height="832" />
     </state>
-    <state width="1493" height="279" key="GridCell.Tab.1.right/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638643226070" />
-    <state width="1493" height="279" key="GridCell.Tab.2.bottom" timestamp="1638643226070">
+    <state width="1493" height="279" key="GridCell.Tab.1.right/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638693058253" />
+    <state width="1493" height="279" key="GridCell.Tab.2.bottom" timestamp="1638693058253">
       <screen x="1920" y="-154" width="1536" height="832" />
     </state>
-    <state width="1493" height="279" key="GridCell.Tab.2.bottom/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638643226070" />
-    <state width="1493" height="279" key="GridCell.Tab.2.center" timestamp="1638643226070">
+    <state width="1493" height="279" key="GridCell.Tab.2.bottom/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638693058253" />
+    <state width="1493" height="279" key="GridCell.Tab.2.center" timestamp="1638693058253">
       <screen x="1920" y="-154" width="1536" height="832" />
     </state>
-    <state width="1493" height="279" key="GridCell.Tab.2.center/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638643226070" />
-    <state width="1493" height="279" key="GridCell.Tab.2.left" timestamp="1638643226070">
+    <state width="1493" height="279" key="GridCell.Tab.2.center/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638693058253" />
+    <state width="1493" height="279" key="GridCell.Tab.2.left" timestamp="1638693058253">
       <screen x="1920" y="-154" width="1536" height="832" />
     </state>
-    <state width="1493" height="279" key="GridCell.Tab.2.left/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638643226070" />
-    <state width="1493" height="279" key="GridCell.Tab.2.right" timestamp="1638643226070">
+    <state width="1493" height="279" key="GridCell.Tab.2.left/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638693058253" />
+    <state width="1493" height="279" key="GridCell.Tab.2.right" timestamp="1638693058253">
       <screen x="1920" y="-154" width="1536" height="832" />
     </state>
-    <state width="1493" height="279" key="GridCell.Tab.2.right/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638643226070" />
-    <state width="1493" height="279" key="GridCell.Tab.3.bottom" timestamp="1638643226071">
+    <state width="1493" height="279" key="GridCell.Tab.2.right/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638693058253" />
+    <state width="1493" height="279" key="GridCell.Tab.3.bottom" timestamp="1638693058253">
       <screen x="1920" y="-154" width="1536" height="832" />
     </state>
-    <state width="1493" height="279" key="GridCell.Tab.3.bottom/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638643226071" />
-    <state width="1493" height="279" key="GridCell.Tab.3.center" timestamp="1638643226071">
+    <state width="1493" height="279" key="GridCell.Tab.3.bottom/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638693058253" />
+    <state width="1493" height="279" key="GridCell.Tab.3.center" timestamp="1638693058253">
       <screen x="1920" y="-154" width="1536" height="832" />
     </state>
-    <state width="1493" height="279" key="GridCell.Tab.3.center/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638643226071" />
-    <state width="1493" height="279" key="GridCell.Tab.3.left" timestamp="1638643226071">
+    <state width="1493" height="279" key="GridCell.Tab.3.center/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638693058253" />
+    <state width="1493" height="279" key="GridCell.Tab.3.left" timestamp="1638693058253">
       <screen x="1920" y="-154" width="1536" height="832" />
     </state>
-    <state width="1493" height="279" key="GridCell.Tab.3.left/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638643226071" />
-    <state width="1493" height="279" key="GridCell.Tab.3.right" timestamp="1638643226071">
+    <state width="1493" height="279" key="GridCell.Tab.3.left/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638693058253" />
+    <state width="1493" height="279" key="GridCell.Tab.3.right" timestamp="1638693058253">
       <screen x="1920" y="-154" width="1536" height="832" />
     </state>
-    <state width="1493" height="279" key="GridCell.Tab.3.right/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638643226071" />
+    <state width="1493" height="279" key="GridCell.Tab.3.right/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638693058253" />
     <state x="2507" y="-68" key="RiderGenerateDialog" timestamp="1638631393034">
       <screen x="1920" y="-154" width="1536" height="832" />
     </state>
     <state x="2507" y="-68" key="RiderGenerateDialog/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638631393034" />
+    <state x="2013" y="-61" width="1350" height="638" key="VCS.FileHistoryDialog" timestamp="1638689438042">
+      <screen x="1920" y="-154" width="1536" height="832" />
+    </state>
+    <state x="2013" y="-61" width="1350" height="638" key="VCS.FileHistoryDialog/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638689438042" />
+    <state x="2351" y="-1" key="search.everywhere.popup" timestamp="1638678893383">
+      <screen x="1920" y="-154" width="1536" height="832" />
+    </state>
+    <state x="2351" y="-1" key="search.everywhere.popup/1920.-154.1536.832/0.0.1920.1040@1920.-154.1536.832" timestamp="1638678893383" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/2DGamekit/Scripts/Character/MonoBehaviours/Damager.cs</url>
+          <line>72</line>
+          <properties documentPath="D:\geekbrains.ru\Projects\Unity\2DGameKitGamesJam2021\Assets\2DGamekit\Scripts\Character\MonoBehaviours\Damager.cs" initialLine="72">
+            <startOffsets>
+              <option value="2641" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2687" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/2DGamekit/Scripts/Character/MonoBehaviours/Damager.cs</url>
+          <line>87</line>
+          <properties documentPath="D:\geekbrains.ru\Projects\Unity\2DGameKitGamesJam2021\Assets\2DGamekit\Scripts\Character\MonoBehaviours\Damager.cs" initialLine="87">
+            <startOffsets>
+              <option value="3368" />
+            </startOffsets>
+            <endOffsets>
+              <option value="3406" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

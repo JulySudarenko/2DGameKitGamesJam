@@ -203,7 +203,7 @@ namespace Gamekit2D
                 else
                 {
                     IsGrounded = relativeVelocity.y <= 0f;
-
+                
                     if (m_Capsule != null)
                     {
                         if (m_GroundColliders[1] != null)
